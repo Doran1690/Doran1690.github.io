@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Doran Cordova Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a single reading column like an engineer's notebook; each project is a numbered entry with a mono "spec line" and its evidence (diagram, chart, numbers). */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --ink: #16202c;
+  --muted: #5a6676;
+  --line: #dde2e9;
+  --accent: #1f5fbf;
+  --accent-soft: #e6eefb;
+  --highlight: #c2410c;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141b; --surface: #161d27; --ink: #e7ecf2; --muted: #9aa6b5;
+    --line: #273241; --accent: #7aa7f0; --accent-soft: #1b2a40; --highlight: #f08a4b;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141b; --surface: #161d27; --ink: #e7ecf2; --muted: #9aa6b5;
+  --line: #273241; --accent: #7aa7f0; --accent-soft: #1b2a40; --highlight: #f08a4b;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 56px 20px 72px; display: grid; gap: 56px; }
+
+header { display: grid; gap: 14px; }
+.kicker { font-family: var(--font-mono); font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+h1 { font-size: clamp(34px, 6vw, 48px); line-height: 1.1; margin: 0; font-weight: 700; letter-spacing: -.02em; text-wrap: balance; }
+.lede { font-size: 19px; color: var(--muted); margin: 0; max-width: 62ch; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 14px; text-decoration: none;
+  padding: 8px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface); color: var(--ink);
+}
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.btn.primary:hover { color: var(--bg); opacity: .9; }
+
+h2 { font-size: 14px; font-family: var(--font-mono); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.about p { margin: 0; max-width: 62ch; }
+.facts { display: grid; gap: 12px; margin: 0; }
+.facts div { display: grid; gap: 2px; }
+.facts dt { font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.facts dd { margin: 0; }
+
+.skills { display: grid; gap: 10px; }
+.skillrow { display: grid; grid-template-columns: 140px 1fr; gap: 12px; align-items: baseline; }
+.skillrow span:first-child { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 12.5px; padding: 3px 9px; border-radius: 4px; background: var(--accent-soft); color: var(--ink); }
+
+.projects { display: grid; gap: 28px; }
+.project {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 28px; display: grid; gap: 16px;
+}
+.phead { display: grid; gap: 4px; }
+.pnum { font-family: var(--font-mono); font-size: 13px; color: var(--highlight); }
+.project h3 { font-size: 24px; line-height: 1.25; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+.project .sub { margin: 0; color: var(--muted); max-width: 62ch; }
+.project ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 68ch; }
+.plinks { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.figure { border: 1px solid var(--line); border-radius: 8px; padding: 18px; background: var(--bg); overflow-x: auto; }
+.figcap { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin: 0 0 12px; }
+
+.pipeline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 13px; }
+.pipeline .step { padding: 6px 10px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); white-space: nowrap; }
+.pipeline .step.key { border-color: var(--accent); color: var(--accent); }
+.pipeline .arrow { color: var(--muted); }
+.pipeline + .pipeline { margin-top: 10px; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat { border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; }
+.stat b { display: block; font-size: 26px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 14px; color: var(--muted); }
+
+.bars { display: grid; gap: 10px; font-variant-numeric: tabular-nums; }
+.bar { display: grid; grid-template-columns: 96px 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
+.bar .track { height: 14px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--accent); }
+.bar.hot .fill { background: var(--highlight); }
+.bar .val { text-align: right; font-family: var(--font-mono); font-size: 13px; }
+.twocharts { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 640px) {
+  .wrap { padding-top: 36px; gap: 44px; }
+  .about, .twocharts { grid-template-columns: 1fr; }
+  .skillrow { grid-template-columns: 1fr; gap: 4px; }
+  .project { padding: 20px; }
+  .stats { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header>
+    <div class="kicker">Ramat Gan, Israel · Computer Science, Afeka College of Engineering</div>
+    <h1>Doran Cordova</h1>
+    <p class="lede">Third-year Computer Science student building data and AI applications with Python and SQL. Before university, I spent two years as the sole developer of a data extraction system in the IDF.</p>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/Doran1690">github.com/Doran1690</a>
+    </div>
+  </header>
+
+  <section aria-labelledby="about-h">
+    <h2 id="about-h">About</h2>
+    <div class="about">
+      <p>I like work where data turns into a clear answer: writing the query, checking that the numbers are right, and explaining what they mean. My recent projects combine that with large language models, from a study assistant that answers questions from course PDFs to an analysis pipeline that generates its own data with an open-source model.</p>
+      <dl class="facts">
+        <div><dt>Military service · 2021–2023</dt><dd>Back Office developer, IDF C4I &amp; Cyber Defense Directorate. Sole developer of a data extraction system used by hundreds of users, writing complex SQL queries for workforce planning.</dd></div>
+        <div><dt>Education</dt><dd>B.Sc. Computer Science, Afeka College of Engineering, Tel Aviv (third year)</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-h">
+    <h2 id="skills-h">Skills</h2>
+    <div class="skills">
+      <div class="skillrow"><span>Languages</span><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Java</span><span class="chip">C</span></div></div>
+      <div class="skillrow"><span>Data</span><div class="chips"><span class="chip">pandas</span><span class="chip">PostgreSQL</span><span class="chip">SQLite</span><span class="chip">Matplotlib</span><span class="chip">JDBC</span></div></div>
+      <div class="skillrow"><span>AI &amp; LLMs</span><div class="chips"><span class="chip">RAG</span><span class="chip">Claude API</span><span class="chip">Hugging Face Transformers</span><span class="chip">Chroma</span><span class="chip">sentence-transformers</span></div></div>
+      <div class="skillrow"><span>Backend &amp; tools</span><div class="chips"><span class="chip">FastAPI</span><span class="chip">pytest</span><span class="chip">GitHub Actions</span><span class="chip">Git</span><span class="chip">Google Colab</span></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="projects-h">
+    <h2 id="projects-h">Projects</h2>
+    <div class="projects">
+
+      <article class="project">
+        <div class="phead">
+          <span class="pnum">01 · AI application</span>
+          <h3>Study Buddy: chat with your course material</h3>
+          <p class="sub">Upload lecture PDFs, ask questions in Hebrew or English, and get answers grounded in the material with page-level citations. Generates practice exams with one click.</p>
+        </div>
+        <div class="figure">
+          <p class="figcap">How a question is answered</p>
+          <div class="pipeline"><span class="step">PDF</span><span class="arrow">→</span><span class="step">clean &amp; chunk by page</span><span class="arrow">→</span><span class="step">multilingual embeddings</span><span class="arrow">→</span><span class="step">Chroma</span></div>
+          <div class="pipeline"><span class="step">question</span><span class="arrow">→</span><span class="step">top-k search</span><span class="arrow">→</span><span class="step key">Claude</span><span class="arrow">→</span><span class="step">answer with [1][2] citations</span></div>
+        </div>
+        <ul>
+          <li>Retrieval-Augmented Generation (RAG) system with a FastAPI backend and a right-to-left web interface.</li>
+          <li>Hebrew questions can match English notes, because both languages share one embedding space.</li>
+          <li>Switches between sending the whole document (for broad questions like "summarize this file") and similarity search for large material.</li>
+          <li>Quiz mode uses structured JSON output, so every generated exam is valid and each question points back to its page.</li>
+          <li>Testing on real lectures found that slide decks were half noise; a cleaning step cut one lecture from 32K to 16K characters without losing content. Also found and fixed a startup race condition, with a regression test.</li>
+          <li>pytest suite with a fake embedder and fake LLM, running in CI on every push.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span><span class="chip">Chroma</span><span class="chip">Claude API</span><span class="chip">PyMuPDF</span><span class="chip">pytest</span></div>
+        <div class="plinks"><a class="btn" href="https://github.com/Doran1690/study-buddy">View code</a></div>
+      </article>
+
+      <article class="project">
+        <div class="phead">
+          <span class="pnum">02 · Data analysis</span>
+          <h3>Gym Membership Churn Analysis</h3>
+          <p class="sub">An end-to-end analysis of why gym members leave, from generating the data to SQL checks and charts.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>100</b><span>members generated with Llama 3.2 3B on a GPU</span></div>
+          <div class="stat"><b>36%</b><span>overall churn</span></div>
+          <div class="stat"><b>50%</b><span>churn in the Holon branch, the highest</span></div>
+        </div>
+        <div class="figure">
+          <div class="twocharts">
+            <div>
+              <p class="figcap">Churn rate by branch</p>
+              <div class="bars">
+                <div class="bar hot"><span>Holon</span><div class="track"><div class="fill" style="width:50%"></div></div><span class="val">50%</span></div>
+                <div class="bar"><span>Tel Aviv</span><div class="track"><div class="fill" style="width:33%"></div></div><span class="val">33%</span></div>
+                <div class="bar"><span>Ramat Gan</span><div class="track"><div class="fill" style="width:26%"></div></div><span class="val">26%</span></div>
+              </div>
+            </div>
+            <div>
+              <p class="figcap">Churn rate by plan</p>
+              <div class="bars">
+                <div class="bar hot"><span>Student</span><div class="track"><div class="fill" style="width:50%"></div></div><span class="val">50%</span></div>
+                <div class="bar"><span>Monthly</span><div class="track"><div class="fill" style="width:38%"></div></div><span class="val">38%</span></div>
+                <div class="bar"><span>Annual</span><div class="track"><div class="fill" style="width:22%"></div></div><span class="val">22%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul>
+          <li>Generated realistic member records with an open-source LLM, assigned churn with rules in Python, and ran data quality checks.</li>
+          <li>Analyzed churn with pandas and SQL: members visiting fewer than 7 times a month churned at 46%, vs. 33% for everyone else.</li>
+          <li>Students had the highest churn even though no rule targeted them. 15 of the 26 students are in Holon, and a SQL check showed part of the student effect is really a branch effect.</li>
+          <li>Documented the limits honestly: synthetic data and small groups. Next step is rerunning on 1,000 members.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">pandas</span><span class="chip">SQLite</span><span class="chip">Matplotlib</span><span class="chip">Hugging Face</span></div>
+        <div class="plinks">
+          <a class="btn" href="https://github.com/Doran1690/llm-engineering-projects/blob/main/gym_churn_analysis.ipynb">View notebook</a>
+          <a class="btn" href="https://colab.research.google.com/github/Doran1690/llm-engineering-projects/blob/main/gym_churn_analysis.ipynb">Open in Colab</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="phead">
+          <span class="pnum">03 · LLM tool</span>
+          <h3>Synthetic Data Generator</h3>
+          <p class="sub">Type a request like "Give me 10 fake customers with name, age and city" and an open-source model returns realistic, varied data for testing systems without exposing real personal information.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>6.4 → 2.3 GB</b><span>GPU memory after 4-bit compression</span></div>
+          <div class="stat"><b>0</b><span>data sent to an external API</span></div>
+          <div class="stat"><b>3B</b><span>parameters, Llama 3.2 Instruct</span></div>
+        </div>
+        <ul>
+          <li>Loads Llama 3.2 3B Instruct from Hugging Face and compresses it to 4-bit with bitsandbytes to fit a free T4 GPU.</li>
+          <li>Wraps prompts in the model's chat template and decodes only the newly generated tokens.</li>
+          <li>Simple Gradio interface. The same generator produced the data for the churn analysis above.</li>
+        </ul>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Transformers</span><span class="chip">bitsandbytes</span><span class="chip">PyTorch</span><span class="chip">Gradio</span></div>
+        <div class="plinks">
+          <a class="btn" href="https://github.com/Doran1690/llm-engineering-projects/blob/main/synthetic_data_generator.ipynb">View notebook</a>
+          <a class="btn" href="https://colab.research.google.com/github/Doran1690/llm-engineering-projects/blob/main/synthetic_data_generator.ipynb">Open in Colab</a>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="phead">
+          <span class="pnum">04 · Database design</span>
+          <h3>College Management System: Database Integration</h3>
+          <p class="sub">Refactored a Java object-oriented application from in-memory arrays and local files to a fully normalized PostgreSQL database.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>3NF</b><span>normalized schema</span></div>
+          <div class="stat"><b>5</b><span>related entities with PK/FK constraints</span></div>
+          <div class="stat"><b>10+</b><span>analytical SQL queries</span></div>
+        </div>
+        <ul>
+          <li>Designed the ERD and relational schema for departments, lecturers, committees and articles, including a many-to-many junction table.</li>
+          <li>Full CRUD from Java through JDBC with prepared statements; aggregations moved from Java loops into SQL.</li>
+          <li>Queries use JOINs, GROUP BY, aggregations and subqueries, plus triggers for data integrity.</li>
+          <li>Joint academic project with <a href="https://github.com/yuval3434">@yuval3434</a>.</li>
+        </ul>
+        <div class="chips"><span class="chip">Java</span><span class="chip">PostgreSQL</span><span class="chip">JDBC</span><span class="chip">SQL</span><span class="chip">ERD</span></div>
+        <div class="plinks"><a class="btn" href="https://github.com/Doran1690/College-Management-System-DB">View code</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer>
+    All code is on GitHub at <a href="https://github.com/Doran1690">github.com/Doran1690</a>.
+  </footer>
+</main>
+</body>
+</html>
