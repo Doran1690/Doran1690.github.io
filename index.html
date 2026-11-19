@@ -130,7 +130,7 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
   <header>
     <div class="kicker">Ramat Gan, Israel · Computer Science, Afeka College of Engineering</div>
     <h1>Doran Cordova</h1>
-    <p class="lede">Third-year Computer Science student building data and AI applications with Python and SQL. Before university, I spent two years as the sole developer of a data extraction system in the IDF.</p>
+    <p class="lede">Third-year Computer Science student building full-stack applications: backend APIs, databases, web interfaces and automated tests. Before university, I spent two years as the sole developer and owner of a data system in the IDF used by hundreds of people.</p>
     <div class="links">
       <a class="btn primary" href="https://github.com/Doran1690">github.com/Doran1690</a>
     </div>
@@ -139,7 +139,7 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
   <section aria-labelledby="about-h">
     <h2 id="about-h">About</h2>
     <div class="about">
-      <p>I like work where data turns into a clear answer: writing the query, checking that the numbers are right, and explaining what they mean. My recent projects combine that with large language models, from a study assistant that answers questions from course PDFs to an analysis pipeline that generates its own data with an open-source model.</p>
+      <p>I like owning a system end to end: designing the database, building the API, writing the tests, and keeping it working for real users. In the army I was the only developer on a system that hundreds of people relied on, so I handled everything from requirements to fixes. My recent projects build on that with AI features, like a study assistant that answers questions from course PDFs with page citations.</p>
       <dl class="facts">
         <div><dt>Military service · 2021–2023</dt><dd>Back Office developer, IDF C4I &amp; Cyber Defense Directorate. Sole developer of a data extraction system used by hundreds of users, writing complex SQL queries for workforce planning.</dd></div>
         <div><dt>Education</dt><dd>B.Sc. Computer Science, Afeka College of Engineering, Tel Aviv (third year)</dd></div>
@@ -150,10 +150,10 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
   <section aria-labelledby="skills-h">
     <h2 id="skills-h">Skills</h2>
     <div class="skills">
-      <div class="skillrow"><span>Languages</span><div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Java</span><span class="chip">C</span></div></div>
-      <div class="skillrow"><span>Data</span><div class="chips"><span class="chip">pandas</span><span class="chip">PostgreSQL</span><span class="chip">SQLite</span><span class="chip">Matplotlib</span><span class="chip">JDBC</span></div></div>
-      <div class="skillrow"><span>AI &amp; LLMs</span><div class="chips"><span class="chip">RAG</span><span class="chip">Claude API</span><span class="chip">Hugging Face Transformers</span><span class="chip">Chroma</span><span class="chip">sentence-transformers</span></div></div>
-      <div class="skillrow"><span>Backend &amp; tools</span><div class="chips"><span class="chip">FastAPI</span><span class="chip">pytest</span><span class="chip">GitHub Actions</span><span class="chip">Git</span><span class="chip">Google Colab</span></div></div>
+      <div class="skillrow"><span>Languages</span><div class="chips"><span class="chip">Java</span><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">C</span></div></div>
+      <div class="skillrow"><span>Backend</span><div class="chips"><span class="chip">REST APIs</span><span class="chip">FastAPI</span><span class="chip">JDBC</span><span class="chip">PostgreSQL</span><span class="chip">SQLite</span></div></div>
+      <div class="skillrow"><span>Testing &amp; delivery</span><div class="chips"><span class="chip">pytest</span><span class="chip">GitHub Actions CI</span><span class="chip">Git</span></div></div>
+      <div class="skillrow"><span>AI &amp; data</span><div class="chips"><span class="chip">Claude API</span><span class="chip">RAG</span><span class="chip">Chroma</span><span class="chip">Hugging Face Transformers</span><span class="chip">pandas</span></div></div>
     </div>
   </section>
 
@@ -163,7 +163,7 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
 
       <article class="project">
         <div class="phead">
-          <span class="pnum">01 · AI application</span>
+          <span class="pnum">01 · Full-stack application</span>
           <h3>Study Buddy: chat with your course material</h3>
           <p class="sub">Upload lecture PDFs, ask questions in Hebrew or English, and get answers grounded in the material with page-level citations. Generates practice exams with one click.</p>
         </div>
@@ -173,7 +173,7 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
           <div class="pipeline"><span class="step">question</span><span class="arrow">→</span><span class="step">top-k search</span><span class="arrow">→</span><span class="step key">Claude</span><span class="arrow">→</span><span class="step">answer with [1][2] citations</span></div>
         </div>
         <ul>
-          <li>Retrieval-Augmented Generation (RAG) system with a FastAPI backend and a right-to-left web interface.</li>
+          <li>FastAPI backend with a REST API (upload, list and delete documents, ask a question, generate a quiz), auto-generated API docs, and a right-to-left web interface.</li>
           <li>Hebrew questions can match English notes, because both languages share one embedding space.</li>
           <li>Switches between sending the whole document (for broad questions like "summarize this file") and similarity search for large material.</li>
           <li>Quiz mode uses structured JSON output, so every generated exam is valid and each question points back to its page.</li>
@@ -186,7 +186,28 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
 
       <article class="project">
         <div class="phead">
-          <span class="pnum">02 · Data analysis</span>
+          <span class="pnum">02 · Backend &amp; database</span>
+          <h3>College Management System: Database Integration</h3>
+          <p class="sub">Refactored a Java object-oriented application from in-memory arrays and local files to a fully normalized PostgreSQL database.</p>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>3NF</b><span>normalized schema</span></div>
+          <div class="stat"><b>5</b><span>related entities with PK/FK constraints</span></div>
+          <div class="stat"><b>10+</b><span>analytical SQL queries</span></div>
+        </div>
+        <ul>
+          <li>Designed the ERD and relational schema for departments, lecturers, committees and articles, including a many-to-many junction table.</li>
+          <li>Full CRUD from Java through JDBC with prepared statements; aggregations moved from Java loops into SQL.</li>
+          <li>Queries use JOINs, GROUP BY, aggregations and subqueries, plus triggers for data integrity.</li>
+          <li>Joint academic project with <a href="https://github.com/yuval3434">@yuval3434</a>.</li>
+        </ul>
+        <div class="chips"><span class="chip">Java</span><span class="chip">PostgreSQL</span><span class="chip">JDBC</span><span class="chip">SQL</span><span class="chip">ERD</span></div>
+        <div class="plinks"><a class="btn" href="https://github.com/Doran1690/College-Management-System-DB">View code</a></div>
+      </article>
+
+      <article class="project">
+        <div class="phead">
+          <span class="pnum">03 · Data analysis</span>
           <h3>Gym Membership Churn Analysis</h3>
           <p class="sub">An end-to-end analysis of why gym members leave, from generating the data to SQL checks and charts.</p>
         </div>
@@ -230,7 +251,7 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
 
       <article class="project">
         <div class="phead">
-          <span class="pnum">03 · LLM tool</span>
+          <span class="pnum">04 · LLM tool</span>
           <h3>Synthetic Data Generator</h3>
           <p class="sub">Type a request like "Give me 10 fake customers with name, age and city" and an open-source model returns realistic, varied data for testing systems without exposing real personal information.</p>
         </div>
@@ -249,27 +270,6 @@ footer { font-size: 14px; color: var(--muted); border-top: 1px solid var(--line)
           <a class="btn" href="https://github.com/Doran1690/llm-engineering-projects/blob/main/synthetic_data_generator.ipynb">View notebook</a>
           <a class="btn" href="https://colab.research.google.com/github/Doran1690/llm-engineering-projects/blob/main/synthetic_data_generator.ipynb">Open in Colab</a>
         </div>
-      </article>
-
-      <article class="project">
-        <div class="phead">
-          <span class="pnum">04 · Database design</span>
-          <h3>College Management System: Database Integration</h3>
-          <p class="sub">Refactored a Java object-oriented application from in-memory arrays and local files to a fully normalized PostgreSQL database.</p>
-        </div>
-        <div class="stats">
-          <div class="stat"><b>3NF</b><span>normalized schema</span></div>
-          <div class="stat"><b>5</b><span>related entities with PK/FK constraints</span></div>
-          <div class="stat"><b>10+</b><span>analytical SQL queries</span></div>
-        </div>
-        <ul>
-          <li>Designed the ERD and relational schema for departments, lecturers, committees and articles, including a many-to-many junction table.</li>
-          <li>Full CRUD from Java through JDBC with prepared statements; aggregations moved from Java loops into SQL.</li>
-          <li>Queries use JOINs, GROUP BY, aggregations and subqueries, plus triggers for data integrity.</li>
-          <li>Joint academic project with <a href="https://github.com/yuval3434">@yuval3434</a>.</li>
-        </ul>
-        <div class="chips"><span class="chip">Java</span><span class="chip">PostgreSQL</span><span class="chip">JDBC</span><span class="chip">SQL</span><span class="chip">ERD</span></div>
-        <div class="plinks"><a class="btn" href="https://github.com/Doran1690/College-Management-System-DB">View code</a></div>
       </article>
 
     </div>
